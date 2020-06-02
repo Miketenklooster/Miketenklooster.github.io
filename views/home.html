@@ -44,22 +44,17 @@
         const form = document.getElementById('form');
 
         form.addEventListener('submit', function(event) {
+            event.preventDefault();
 
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
-            fetch('views/home', {method: 'POST'} /*, options */)
-                .then((response) => response.text())
-                .then((html) => {
-                    const content = document.getElementById('main-content');
-                    content.innerHTML = html;
-                    let scripts = content.getElementsByTagName("script");
-                    for (let i = 0; i < scripts.length; i++) {
-                        eval(scripts[i].innerText);
-                    }
+            fetch('views/home' /*, options */)
+                .then((response) => response)
+                .then((response) => {
+                    getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
                 })
                 .catch((error) => console.error(error));
             // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
-            // event.preventDefault();
         });
 
         /**

@@ -3,7 +3,7 @@
         <ul class="uk-pagination uk-flex-center">
             <li class="uk-margin-auto"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
-                <form method="post" onsubmit="sessionStorage.setItem('page', document.getElementById('npage').value); getView('main-content', 'views/home.html', sessionStorage.getItem('page'));">
+                <form method="post" id="search-page-by-number">
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
                 </form>
             </li>
@@ -38,20 +38,34 @@
 
         const data =
             //onsubmit="sessionStorage.setItem('title', document.getElementById('search').value); sessionStorage.setItem('page', '1');"
-            '<form id="form" class="uk-search uk-search-default"  method="post">' +
+            '<form id="search-form" class="uk-search uk-search-default"  method="post">' +
             '   <span class="uk-form-icon " uk-icon="icon: search"></span>' +
             '   <input id="search" class="uk-input uk-form-large" type="text" placeholder="Search what you want to watch..." autofocus>' +
             '</form>';
 
         nav.innerHTML = data;
 
-        const form = document.getElementById('form');
+        const search_form = document.getElementById('search-form');
 
-        form.addEventListener('submit', function(event) {
+        search_form.addEventListener('submit', function(event) {
             event.preventDefault();
-
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
+            fetch('views/home' /*, options */)
+                .then((response) => response)
+                .then((response) => {
+                    getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+                })
+                .catch((error) => console.error(error));
+            // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+        });
+
+        const search_page_by_number = document.getElementById('search-form');
+
+        search_page_by_number.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            sessionStorage.setItem('page', document.getElementById('npage').value);
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {

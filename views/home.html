@@ -3,7 +3,7 @@
         <ul class="uk-pagination uk-flex-center">
             <li class="uk-margin-auto"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
-                <form method="post" onsubmit="sessionStorage.setItem('page', document.getElementById('npage').value);">
+                <form method="post" onsubmit="sessionStorage.setItem('page', document.getElementById('npage').value); getView('main-content', 'views/home.html', sessionStorage.getItem('page'));">
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
                 </form>
             </li>

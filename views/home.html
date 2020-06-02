@@ -65,8 +65,8 @@
 
         search_page_by_number.addEventListener('submit', function(event) {
             event.preventDefault();
-
-            sessionStorage.setItem('page', document.getElementById('npage').value);
+            const number = document.getElementById('npage').value ? document.getElementById('npage').value : "1";
+            sessionStorage.setItem('page', number);
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {

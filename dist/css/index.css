@@ -1,0 +1,63 @@
+/*
+ * Success
+ */
+.uk-button-success {
+    background-color: #8fce48;
+    color: #fff;
+    border: 1px solid transparent;
+}
+/* Hover + Focus */
+.uk-button-success:hover,
+.uk-button-success:focus {
+    background-color: #6fac34;
+    color: #fff;
+}
+/* OnClick + Active */
+.uk-button-success:active,
+.uk-button-success.uk-active {
+    background-color: #6fac34;
+    color: #fff;
+}
+/*
+ * Disabled
+ * The same for all style modifiers
+ */
+.uk-button-success:disabled {
+    background-color: transparent;
+    color: #999;
+    border-color: #e5e5e5;
+}
+
+/*
+* New colors
+ */
+
+.white {
+    color: #ffffff;
+}
+
+.lightpink {
+    color: #FFCCD1;
+}
+
+/*!**/
+/** Better color for selected active*/
+/* *!*/
+/*.uk-subnav-pill > .uk-active > a{*/
+/*    background-color: #999;*/
+/*}*/
+
+/*!**/
+/** Inline List*/
+/**!*/
+/*ul {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    !* Below sets up your display method: flex-start|flex-end|space-between|space-around *!*/
+/*    justify-content: flex-start;*/
+/*    !* Below removes bullets and cleans white-space *!*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*    !* Bonus: forces no word-wrap *!*/
+/*    white-space: nowrap;*/
+/*}*/

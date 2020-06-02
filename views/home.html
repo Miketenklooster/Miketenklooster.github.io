@@ -34,7 +34,7 @@
 
         const data =
             //onsubmit="sessionStorage.setItem('title', document.getElementById('search').value); sessionStorage.setItem('page', '1');"
-            '<form id="form" class="uk-search uk-search-default" action="index.html" method="post">' +
+            '<form id="form" class="uk-search uk-search-default"  method="post">' +
             '   <span class="uk-form-icon " uk-icon="icon: search"></span>' +
             '   <input id="search" class="uk-input uk-form-large" type="text" placeholder="Search what you want to watch..." autofocus>' +
             '</form>';
@@ -48,6 +48,8 @@
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
 
+            getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+            event.preventDefault();
         });
 
         /**

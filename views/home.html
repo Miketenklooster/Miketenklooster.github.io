@@ -47,9 +47,19 @@
 
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
-
-            getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
-            event.preventDefault();
+            fetch('views/home', {method: 'POST'} /*, options */)
+                .then((response) => response.text())
+                .then((html) => {
+                    const content = document.getElementById('main-content');
+                    content.innerHTML = html;
+                    let scripts = content.getElementsByTagName("script");
+                    for (let i = 0; i < scripts.length; i++) {
+                        eval(scripts[i].innerText);
+                    }
+                })
+                .catch((error) => console.error(error));
+            // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+            // event.preventDefault();
         });
 
         /**

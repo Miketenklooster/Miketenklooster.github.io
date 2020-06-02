@@ -40,6 +40,13 @@
     color: #FFCCD1;
 }
 
+/*
+* Always show scrollbar
+ */
+html {
+    overflow-y:scroll;
+}
+
 /*!**/
 /** Better color for selected active*/
 /* *!*/

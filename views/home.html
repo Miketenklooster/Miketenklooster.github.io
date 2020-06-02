@@ -7,10 +7,13 @@
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
                 </form>
             </li>
-            <li class="uk-margin-auto" id="next_page"></li>
+            <li class="uk-margin-auto" id="next-page"></li>
         </ul>
+        <div class="uk-text-i uk-text-light uk-text-center">
+            <p class="uk-margin-auto" id="total-pages"></p>
+        </div>
     </div>
-    <div uk-filter="target: .js-filter">
+    <div uk-filter="target: .js-filter; animation: 500">
 
         <ul class="uk-subnav uk-subnav-pill uk-child-width-auto@s uk-text-center">
             <li class="uk-active" uk-filter-control><a>All</a></li>
@@ -24,11 +27,12 @@
 </section>
 <script>
     ((e) => {
-        const section = document.getElementById("next_page");
+        const section = document.getElementById("next-page");
         document.getElementById("npage").placeholder = sessionStorage.getItem('page');
         const title = document.getElementById("title");
         title.innerHTML = '<h1><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></p>';
         const nav = document.getElementById("nav");
+        const total_pages = document.getElementById("total-pages");
         const background = document.getElementById("background");
         background.style = "background-image: url(dist/img/movie_background.jpg);";
 
@@ -68,6 +72,10 @@
                 const section_data = '<a onclick="nextPage(' + json["totalResults"] + ');"><span class="uk-margin-small-right" uk-pagination-next></span><span class="uk-margin-small-right" uk-pagination-next></span></a>';
                 section.innerHTML += section_data;
 
+                total_pages.innerHTML = '<p>Total pages: '+ numPages(json["totalResults"]) +'</p>';
+
+                const flex = document.getElementById('flex');
+
                 if(json["Error"]) {
                     document.getElementById("error").innerHTML = 'There were no results found with ' + sessionStorage.getItem("title") + ', try a more specific search';
                 }
@@ -75,7 +83,6 @@
                     const search = json["Search"];
 
                     search.map((search) => {
-                        const flex = document.getElementById('flex');
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
                             '   <div class="uk-card-media-top">' +

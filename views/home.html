@@ -3,6 +3,7 @@
         <ul class="uk-pagination uk-flex-center">
             <li class="uk-margin-auto"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
+<!--                onsubmit="sessionStorage.setItem('page', document.getElementById('npage').value); preventDefault(); getView('main-content', 'views/home.html', sessionStorage.getItem('page'));"-->
                 <form method="post" id="search-page-by-number">
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
                 </form>
@@ -60,7 +61,7 @@
             // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
         });
 
-        const search_page_by_number = document.getElementById('search-form');
+        const search_page_by_number = document.getElementById('search-page-by-number');
 
         search_page_by_number.addEventListener('submit', function(event) {
             event.preventDefault();

@@ -21,7 +21,7 @@
                 const background = document.getElementById("background");
 
                 background.style = '';
-                title.innerHTML = '<p><a class="uk-align-left white uk-width-auto" onclick="getView(\'main-content\', \'views/home.html\', Number(sessionStorage.getItem(\'page\')))"><span uk-icon="icon: arrow-left; ratio: 2;"></span></a><a class="uk-width-2-3 white">' + json["Title"] + '</a></p>';
+                title.innerHTML = '<p class="uk-light"><a class="uk-align-left white uk-width-auto" onclick="getView(\'main-content\', \'views/home.html\', Number(sessionStorage.getItem(\'page\')))"><span uk-icon="icon: arrow-left; ratio: 2;"></span></a><a class="uk-width-2-3 white">' + json["Title"] + '</a></p>';
                 nav.innerHTML = '';
                 footer.innerHTML = '';
 

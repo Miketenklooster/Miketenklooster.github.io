@@ -44,10 +44,12 @@
         const form = document.getElementById('form');
 
         form.addEventListener('submit', function(event) {
+            event.preventDefault();
 
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
 
+            location.reload();
         });
 
         /**

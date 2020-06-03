@@ -44,7 +44,7 @@ function nextPage(totalResults)
 
 function numPages(totalResults)
 {
-    return Math.ceil(totalResults / 9);
+    return Math.ceil(totalResults / 10);
 }
 
 // For code optimisation

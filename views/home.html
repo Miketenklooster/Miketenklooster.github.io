@@ -29,7 +29,7 @@
         const section = document.getElementById("next-page");
         document.getElementById("npage").placeholder = sessionStorage.getItem('page');
         const title = document.getElementById("title");
-        title.innerHTML = '<h1><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></p>';
+        title.innerHTML = '<a class="uk-width-auto underline" onclick="getView(\'main-content\', \'views/home.html\', \'1\')"><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></a>';
         const nav = document.getElementById("nav");
         const total_pages = document.getElementById("total-pages");
         const background = document.getElementById("background");

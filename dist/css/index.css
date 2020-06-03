@@ -46,6 +46,12 @@ html {
     overflow-y:scroll;
 }
 
+/*
+* No underline with <a> .underline
+ */
+.underline:hover{
+    text-decoration: none;
+}
 
 /*
 * no arrows in a number text field

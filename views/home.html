@@ -4,7 +4,7 @@
             <li class="uk-margin-auto"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
                 <form method="post" id="search-page-by-number">
-                    <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
+                    <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="number" min="1">
                 </form>
             </li>
             <li class="uk-margin-auto" id="next-page"></li>
@@ -61,7 +61,7 @@
 
         search_page_by_number.addEventListener('submit', function(event) {
             event.preventDefault();
-            const number = document.getElementById('npage').value ? document.getElementById('npage').value : "1";
+            let number = document.getElementById('npage').value;
             sessionStorage.setItem('page', number);
             fetch('views/home' /*, options */)
                 .then((response) => response)
@@ -79,6 +79,7 @@
         fetch(url2)
             .then((data) => data.json())
             .then((json) => {
+                document.getElementById("npage").max = numPages(json["totalResults"]);
                 const section_data = '<a onclick="nextPage(' + json["totalResults"] + ');"><span class="uk-margin-small-right" uk-pagination-next></span><span class="uk-margin-small-right" uk-pagination-next></span></a>';
                 section.innerHTML += section_data;
 

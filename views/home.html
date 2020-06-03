@@ -3,7 +3,6 @@
         <ul class="uk-pagination uk-flex-center">
             <li class="uk-margin-auto"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
-<!--                onsubmit="sessionStorage.setItem('page', document.getElementById('npage').value); preventDefault(); getView('main-content', 'views/home.html', sessionStorage.getItem('page'));"-->
                 <form method="post" id="search-page-by-number">
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="text">
                 </form>
@@ -15,7 +14,6 @@
         </div>
     </div>
     <div uk-filter="target: .js-filter; animation: 500">
-
         <ul class="uk-subnav uk-subnav-pill uk-child-width-auto@s uk-text-center">
             <li class="uk-active" uk-filter-control><a>All</a></li>
             <li uk-filter-control=".tag-movie"><a>Movies</a></li>
@@ -38,7 +36,6 @@
         background.style = "background-image: url(dist/img/movie_background.jpg);";
 
         const data =
-            //onsubmit="sessionStorage.setItem('title', document.getElementById('search').value); sessionStorage.setItem('page', '1');"
             '<form id="search-form" class="uk-search uk-search-default"  method="post">' +
             '   <span class="uk-form-icon " uk-icon="icon: search"></span>' +
             '   <input id="search" class="uk-input uk-form-large" type="text" placeholder="Search what you want to watch..." autofocus>' +
@@ -58,7 +55,6 @@
                     getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
                 })
                 .catch((error) => console.error(error));
-            // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
         });
 
         const search_page_by_number = document.getElementById('search-page-by-number');
@@ -73,7 +69,6 @@
                     getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
                 })
                 .catch((error) => console.error(error));
-            // getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
         });
 
         /**
@@ -100,7 +95,7 @@
                     search.map((search) => {
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
-                            '   <div class="uk-card-media-top">' +
+                            '   <div class="uk-card-media-top uk-text-center">' +
                             '       <a onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + search["Poster"] + '" alt="image"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +

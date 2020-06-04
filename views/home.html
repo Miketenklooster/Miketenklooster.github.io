@@ -20,7 +20,7 @@
             <li uk-filter-control=".tag-series"><a>Series</a></li>
             <li uk-filter-control=".tag-game"><a>Games</a></li>
         </ul>
-        <div class="uk-flex uk-flex-wrap uk-flex-center uk-child-width-auto uk-child-width-1-3@xl uk-child-width-1-3@l uk-child-width-1-3@m uk-child-width-1-2@s js-filter" id="flex"></div>
+        <div class="uk-flex uk-flex-wrap uk-flex-center uk-child-width-auto uk-child-width-1-4@xl uk-child-width-1-4@l uk-child-width-1-3@m uk-child-width-1-2@s js-filter" id="flex"></div>
         <p id="error" class="uk-text-center uk-text-light uk-text-large uk-margin-large-top"></p>
     </div>
 </section>
@@ -38,10 +38,11 @@
         const data =
             '<form id="search-form" class="uk-search uk-search-default"  method="post">' +
             '   <span class="uk-form-icon " uk-icon="icon: search"></span>' +
-            '   <input id="search" class="uk-input uk-form-large" type="text" placeholder="Search what you want to watch..." autofocus>' +
+            '   <input id="search" class="uk-input uk-form-large" type="text" autofocus>' +
             '</form>';
 
         nav.innerHTML = data;
+        document.getElementById("search").placeholder = sessionStorage.getItem("search_bar");
 
         const search_form = document.getElementById('search-form');
 
@@ -49,6 +50,7 @@
             event.preventDefault();
             sessionStorage.setItem('title', document.getElementById('search').value);
             sessionStorage.setItem('page', '1');
+            sessionStorage.setItem("search_bar", document.getElementById('search').value);
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {

@@ -44,7 +44,11 @@ function nextPage(totalResults)
 
 function numPages(totalResults)
 {
-    return Math.ceil(totalResults / 10);
+    let results = Math.ceil(totalResults / 10);
+    if(isNaN(results)){
+        results = 0;
+    }
+    return results;
 }
 
 // For code optimisation

@@ -20,7 +20,7 @@
                     <h1 id="title">
 
                     </h1>
-                    <div class="uk-grid-match uk-align-center uk-margin-large-top" uk-grid>
+                    <div class="uk-grid-match uk-align-center uk-margin-large-top uk-width-1-2@m" uk-grid>
                         <div class="uk-container" id="nav">
                             <!--    This is were the nav content is loaded  -->
                         </div>
@@ -45,7 +45,9 @@
                 if(sessionStorage.getItem("page") === null){
                     sessionStorage.setItem("page", "1");
                 }
-
+                if(sessionStorage.getItem("search_bar") === null){
+                    sessionStorage.setItem("search_bar", "Search what you want to watch...");
+                }
                 getView("main-content", sessionStorage.getItem("site"), parseInt(sessionStorage.getItem('page'), 10));
             })();
         </script>

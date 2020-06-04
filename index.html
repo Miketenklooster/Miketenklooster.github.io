@@ -46,7 +46,7 @@
                     sessionStorage.setItem("page", "1");
                 }
 
-                getView("main-content", sessionStorage.getItem("site"), Number(sessionStorage.getItem('page')));
+                getView("main-content", sessionStorage.getItem("site"), parseInt(sessionStorage.getItem('page'), 10));
             })();
         </script>
     </body>

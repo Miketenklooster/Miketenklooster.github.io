@@ -52,7 +52,7 @@
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {
-                    getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+                    getView('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
                 })
                 .catch((error) => console.error(error));
         });
@@ -66,7 +66,7 @@
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {
-                    getView('main-content', 'views/home.html', Number(sessionStorage.getItem('page')));
+                    getView('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
                 })
                 .catch((error) => console.error(error));
         });
@@ -75,7 +75,7 @@
          * This fetch request gets the data from the omdbapi and loops through the results
          * @type {string}
          */
-        let url2 = "https://www.omdbapi.com/?s=" + sessionStorage.getItem("title") + "&page=" + Number(sessionStorage.getItem('page')) + "&apikey=" + key;
+        let url2 = "https://www.omdbapi.com/?s=" + sessionStorage.getItem("title") + "&page=" + parseInt(sessionStorage.getItem('page'), 10) + "&apikey=" + key;
         fetch(url2)
             .then((data) => data.json())
             .then((json) => {
@@ -105,10 +105,10 @@
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
                             '   <div class="uk-card-media-top uk-text-center">' +
-                            '       <a onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image"></a>' +
+                            '       <a onclick="getView(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +
-                            '       <p><a class="uk-text-lead" onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
+                            '       <p><a class="uk-text-lead" onclick="getView(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
                             '   </div>' +
                             '</div>';
                         flex.innerHTML += data;

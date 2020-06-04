@@ -26,7 +26,7 @@ function getView(elementId, view, page) {
 
 function prevPage()
 {
-    let current_page = Number(sessionStorage.getItem("page"));
+    let current_page = parseInt(sessionStorage.getItem("page"), 10);
     if (current_page > 1) {
         current_page--;
         getView('main-content', 'views/home.html', current_page);
@@ -35,7 +35,7 @@ function prevPage()
 
 function nextPage(totalResults)
 {
-    let current_page = Number(sessionStorage.getItem("page"));
+    let current_page = parseInt(sessionStorage.getItem("page"), 10);
     if (current_page < numPages(totalResults)) {
         current_page++;
         getView('main-content', 'views/home.html', current_page);

@@ -92,12 +92,20 @@
                 }
                 else {
                     const search = json["Search"];
-
+                    let poster;
                     search.map((search) => {
+                        if(search["Poster"] === "N/A"){
+                            //set background image
+                            poster = "./dist/img/image-not-found.png";
+                        }else{
+                            //set background image
+                            poster = search["Poster"];
+                        }
+
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
                             '   <div class="uk-card-media-top uk-text-center">' +
-                            '       <a onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + search["Poster"] + '" alt="image"></a>' +
+                            '       <a onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +
                             '       <p><a class="uk-text-lead" onclick="getView(\'main-content\', \'views/detail.html\', Number(sessionStorage.getItem(\'page\')));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +

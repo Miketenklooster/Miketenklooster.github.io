@@ -47,14 +47,14 @@ html {
 }
 
 /*
-* No underline with <a> .underline
+* No underline with .underline:hover
  */
 .underline:hover{
     text-decoration: none;
 }
 
 /*
-* no arrows in a number text field
+* No arrows in a number text field for
 * Chrome, Safari, Edge, Opera
 */
 input::-webkit-outer-spin-button,
@@ -63,7 +63,10 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-/* Firefox */
+/*
+* No arrows in a number text field for
+* Firefox
+*/
 input[type=number] {
     -moz-appearance: textfield;
 }

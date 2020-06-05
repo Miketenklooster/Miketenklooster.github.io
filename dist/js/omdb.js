@@ -11,7 +11,12 @@ const type = {
 function timeOut(elementId, view, page) {
     const spinner = document.getElementById("spinner");
     spinner.style = 'display: block;';
-    document.getElementById('main-content').innerHTML = '';
+    if(document.getElementById('flex') != null){
+        document.getElementById('flex').innerHTML = '';
+    }
+    if(document.getElementById('main-article') != null){
+        document.getElementById('main-article').innerHTML = '';
+    }
     document.getElementById('footer').innerHTML = '';
     setTimeout(function() {
         getView(elementId, view, page);

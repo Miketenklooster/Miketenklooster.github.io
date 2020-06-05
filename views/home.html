@@ -7,7 +7,7 @@
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="number" min="1">
                 </form>
             </li>
-            <li class="uk-margin-auto" id="next-page"></li>
+            <li class="uk-margin-auto"><a id="next-page"><span class="uk-margin-small-right" uk-pagination-next></span><span class="uk-margin-small-right" uk-pagination-next></span></a></li>
         </ul>
         <div class="uk-text-i uk-text-light uk-text-center">
             <p class="uk-margin-auto" id="total-pages"></p>
@@ -29,7 +29,7 @@
         const section = document.getElementById("next-page");
         document.getElementById("npage").placeholder = sessionStorage.getItem('page');
         const title = document.getElementById("title");
-        title.innerHTML = '<a class="uk-width-auto underline" onclick="getView(\'main-content\', \'views/home.html\', \'1\')"><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></a>';
+        title.innerHTML = '<a class="uk-width-auto underline" onclick="timeOut(\'main-content\', \'views/home.html\', \'1\')"><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></a>';
         const nav = document.getElementById("nav");
         const total_pages = document.getElementById("total-pages");
         const footer = document.getElementById("footer");
@@ -56,7 +56,7 @@
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {
-                    getView('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
+                    timeOut('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
                 })
                 .catch((error) => console.error(error));
         });
@@ -70,7 +70,7 @@
             fetch('views/home' /*, options */)
                 .then((response) => response)
                 .then((response) => {
-                    getView('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
+                    timeOut('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
                 })
                 .catch((error) => console.error(error));
         });
@@ -89,8 +89,12 @@
                     document.getElementById("prev-page").style.visibility = "hidden";
                 }
                 document.getElementById("npage").max = numPages(json["totalResults"]);
-                const section_data = '<a onclick="nextPage(' + json["totalResults"] + ');"><span class="uk-margin-small-right" uk-pagination-next></span><span class="uk-margin-small-right" uk-pagination-next></span></a>';
-                section.innerHTML += section_data;
+                // const section_data = '<a onclick="nextPage(' + json["totalResults"] + ');"></a>';
+                section.addEventListener('click', function(event){
+                    nextPage(json["totalResults"]);
+                });
+                // section.onclick = nextPage(json["totalResults"]);
+                // section.innerHTML += section_data;
 
                 total_pages.innerHTML = '<p>Total pages: '+ numPages(json["totalResults"]) +'</p>';
 
@@ -114,10 +118,10 @@
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
                             '   <div class="uk-card-media-top uk-text-center">' +
-                            '       <a onclick="getView(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
+                            '       <a onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +
-                            '       <p><a class="uk-text-lead" onclick="getView(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
+                            '       <p><a class="uk-text-lead" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
                             '   </div>' +
                             '</div>';
                         flex.innerHTML += data;

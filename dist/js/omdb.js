@@ -8,6 +8,17 @@ const type = {
     episode: 'episode'
 };
 
+function timeOut(elementId, view, page) {
+    const spinner = document.getElementById("spinner");
+    spinner.style = 'display: block;';
+    document.getElementById('main-content').innerHTML = '';
+    document.getElementById('footer').innerHTML = '';
+    setTimeout(function() {
+        getView(elementId, view, page);
+        spinner.style = 'display:none;';
+    }, 1000);
+}
+
 function getView(elementId, view, page) {
     sessionStorage.setItem('site', view);
     sessionStorage.setItem('page', page);
@@ -29,7 +40,7 @@ function prevPage()
     let current_page = parseInt(sessionStorage.getItem("page"), 10);
     if (current_page > 1) {
         current_page--;
-        getView('main-content', 'views/home.html', current_page);
+        timeOut('main-content', 'views/home.html', current_page);
     }
 }
 
@@ -38,7 +49,7 @@ function nextPage(totalResults)
     let current_page = parseInt(sessionStorage.getItem("page"), 10);
     if (current_page < numPages(totalResults)) {
         current_page++;
-        getView('main-content', 'views/home.html', current_page);
+        timeOut('main-content', 'views/home.html', current_page);
     }
 }
 

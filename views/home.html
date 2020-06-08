@@ -1,7 +1,7 @@
 <section class="uk-overflow-auto">
     <div id="section">
         <ul class="uk-pagination uk-flex-center">
-            <li class="uk-margin-auto" id="prev-page"><a onclick="prevPage();"><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
+            <li class="uk-margin-auto" id="prev-page"><a><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
                 <form method="post" id="search-page-by-number">
                     <input id="npage" name="npage" class="uk-input uk-form-width-xsmall uk-form-small uk-text-center" type="number" min="1">
@@ -26,10 +26,11 @@
 </section>
 <script>
     ((e) => {
-        const section = document.getElementById("next-page");
+        // set all constants and data
+        const next_page = document.getElementById("next-page");
         document.getElementById("npage").placeholder = sessionStorage.getItem('page');
         const title = document.getElementById("title");
-        title.innerHTML = '<a class="uk-width-auto underline" onclick="timeOut(\'main-content\', \'views/home.html\', \'1\')"><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></a>';
+        title.innerHTML = '<a class="uk-width-auto underline" id="home-page-title"><span class="white uk-text-bold">MOVIE </span><span class="lightpink uk-text-bold">RADAR</span></a>';
         const nav = document.getElementById("nav");
         const total_pages = document.getElementById("total-pages");
         const footer = document.getElementById("footer");
@@ -37,17 +38,31 @@
         const background = document.getElementById("background");
         background.style = "background-image: url(dist/img/movie_background.jpg);";
 
+        // Page title onclick set the page to 1
+        const page_title = document.getElementById("home-page-title");
+        page_title.addEventListener('click', function(event){
+            timeOut('main-content', 'views/home.html', 1);
+        });
+
+        // Go to the previous page when clicked on the back button
+        const prev_page = document.getElementById("prev-page");
+        prev_page.addEventListener('click', function(event){
+            prevPage();
+        });
+
+        // Set the search form
         const data =
             '<form id="search-form" class="uk-search uk-search-default"  method="post">' +
             '   <span class="uk-form-icon " uk-icon="icon: search"></span>' +
             '   <input id="search" class="uk-input uk-form-large" type="text" autofocus>' +
             '</form>';
-
         nav.innerHTML = data;
+
+        // Set the search bar placeholder
         document.getElementById("search").placeholder = sessionStorage.getItem("search_bar");
 
+        // Search bar onsubmit event
         const search_form = document.getElementById('search-form');
-
         search_form.addEventListener('submit', function(event) {
             event.preventDefault();
             sessionStorage.setItem('title', document.getElementById('search').value);
@@ -61,8 +76,8 @@
                 .catch((error) => console.error(error));
         });
 
+        // Search with the number
         const search_page_by_number = document.getElementById('search-page-by-number');
-
         search_page_by_number.addEventListener('submit', function(event) {
             event.preventDefault();
             let number = document.getElementById('npage').value;
@@ -83,23 +98,23 @@
         fetch(url2)
             .then((data) => data.json())
             .then((json) => {
+                // Show or hide the arrows for next and previous page depending on the total results
                 if(parseInt(sessionStorage.getItem('page'), 10) === numPages(json["totalResults"])){
                     document.getElementById("next-page").style.visibility = "hidden";
                 } else if(parseInt(sessionStorage.getItem('page'), 10) === 1){
                     document.getElementById("prev-page").style.visibility = "hidden";
                 }
                 document.getElementById("npage").max = numPages(json["totalResults"]);
-                // const section_data = '<a onclick="nextPage(' + json["totalResults"] + ');"></a>';
-                section.addEventListener('click', function(event){
+                // Next page arrow onclick event
+                next_page.addEventListener('click', function(event){
                     nextPage(json["totalResults"]);
                 });
-                // section.onclick = nextPage(json["totalResults"]);
-                // section.innerHTML += section_data;
 
                 total_pages.innerHTML = '<p>Total pages: '+ numPages(json["totalResults"]) +'</p>';
 
                 const flex = document.getElementById('flex');
 
+                // Set error when there is an error given else show data
                 if(json["Error"]) {
                     document.getElementById("error").innerHTML = 'There were no results found with ' + sessionStorage.getItem("title") + ', try a more specific search';
                 }
@@ -118,7 +133,7 @@
                         const data =
                             '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
                             '   <div class="uk-card-media-top uk-text-center">' +
-                            '       <a onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
+                            '       <a id="poster-img" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +
                             '       <p><a class="uk-text-lead" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +

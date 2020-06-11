@@ -1,5 +1,5 @@
 <section class="uk-overflow-auto">
-    <div id="section">
+    <section id="section">
         <ul class="uk-pagination uk-flex-center">
             <li class="uk-margin-auto" id="prev-page"><a><span class="uk-margin-small-left" uk-pagination-previous></span><span class="uk-margin-small-left" uk-pagination-previous></span></a></li>
             <li class="uk-text-i">
@@ -12,7 +12,7 @@
         <div class="uk-text-i uk-text-light uk-text-center">
             <p class="uk-margin-auto" id="total-pages"></p>
         </div>
-    </div>
+    </section>
     <div uk-filter="target: .js-filter; animation: 500">
         <ul class="uk-subnav uk-subnav-pill uk-child-width-auto@s uk-text-center">
             <li class="uk-active" uk-filter-control><a>All</a></li>
@@ -42,13 +42,13 @@
         const page_title = document.getElementById("home-page-title");
         page_title.addEventListener('click', function(event){
             timeOut('main-content', 'views/home.html', 1);
-        });
+        }, {once:true});
 
         // Go to the previous page when clicked on the back button
         const prev_page = document.getElementById("prev-page");
         prev_page.addEventListener('click', function(event){
             prevPage();
-        });
+        }, {once:true});
 
         // Set the search form
         const data =
@@ -108,7 +108,7 @@
                 // Next page arrow onclick event
                 next_page.addEventListener('click', function(event){
                     nextPage(json["totalResults"]);
-                });
+                }, {once:true});
 
                 total_pages.innerHTML = '<p>Total pages: '+ numPages(json["totalResults"]) +'</p>';
 
@@ -131,12 +131,12 @@
                         }
 
                         const data =
-                            '<div class="uk-card uk-card-body tag-' + search["Type"] + '">' +
+                            '<div class="uk-card uk-card-body tag-' + search["Type"] + '" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\');  this.onclick=null;">' +
                             '   <div class="uk-card-media-top uk-text-center">' +
-                            '       <a id="poster-img" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
+                            '       <a id="poster-img"><img src="' + poster+ '" alt="image" style="max-height: 350px;"></a>' +
                             '   </div>' +
                             '   <div class="uk-card-footer uk-text-center">' +
-                            '       <p><a class="uk-text-lead" onclick="timeOut(\'main-content\', \'views/detail.html\', parseInt(sessionStorage.getItem(\'page\'), 10));  sessionStorage.setItem(\'imdbID\', \'' + search["imdbID"] + '\')">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
+                            '       <p><a class="uk-text-lead">' + search["Title"] + '</a><br/>' + search["Year"] + ' &#183; ' + search["Type"] + '</p>' +
                             '   </div>' +
                             '</div>';
                         flex.innerHTML += data;

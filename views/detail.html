@@ -29,8 +29,9 @@
                 const page_title = document.getElementById('page-title');
 
                 page_title.addEventListener('click', function(event){
-                    timeOut('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10))
-                });
+                    timeOut('main-content', 'views/home.html', parseInt(sessionStorage.getItem('page'), 10));
+                }, {once:true});
+
 
                 if(json["Poster"] === "N/A"){
                     //set background image
